@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Mian Ammar - My Social Links</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <style>
@@ -126,13 +126,13 @@
 <body>
     <div class="container">
         <div class="profile">
-            <img src="https://raw.githubusercontent.com/Images/blob/de10208beb5d2c099e1902fbeb47809c7cf37d0b/pic2.JPG" alt="Mian Ammar">
-            <h1 onclick="toggleName()">Your Name</h1>
-            <p>Web Developer</p>
-            <p>Location: Your City, Country</p>
+            <img src="https://raw.githubusercontent.com/mianammar09/Social-Media-Handles/main/pic2.JPG" alt="Mian Ammar">
+            <h1 onclick="toggleName()">Mian Ammar Wattoo</h1>
+            <p>Tech Visionary</p>
+            <p>Lahore, Punjab, Pakistan</p>
         </div>
         <div class="quote">
-            <p onclick="toggleQuote()">"Your inspiring quote goes here."</p>
+            <p onclick="toggleQuote()">"Success is not just about making money; it's about making a difference and leaving a legacy. -Ammar"</p>
         </div>
         <div class="social-links">
             <a href="https://www.facebook.com/imianammar" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -146,15 +146,38 @@
         </div>
         
         <div class="contact-links">
-            <p onclick="openEmail()"><i class="far fa-envelope"></i> yourname@example.com</p>
-            <p onclick="callNumber()"><i class="fas fa-phone"></i> +1234567890</p>
+            <p onclick="openEmail()"><i class="far fa-envelope"></i> immianammar@gmail.com</p>
+            <p onclick="callNumber()"><i class="fas fa-phone"></i> +923434218909 </p>
         </div>
         
     </div>
 
     <footer>
-        <p>&copy; Copyright owned by Mian Ammar. Developed by Mian Ammar. | <a href="privacy.html">Privacy Policy</a></p>
+        <p>&copy; Copyright owned by Mian Ammar. Developed by ❤️ for you. | <a href="privacy.html">Privacy Policy</a></p>
     </footer>
+
+    <script>
+        let nameClicked = false;
+
+        function toggleName() {
+            const nameElement = document.querySelector('.profile h1');
+            nameClicked = !nameClicked;
+            nameElement.textContent = nameClicked ? 'Clicked on my name, hoping for secrets? Nope, just good vibes and positivity!😁' : 'Mian Ammar Wattoo';
+        }
+
+        function toggleQuote() {
+            const quoteElement = document.querySelector('.quote p');
+            quoteElement.classList.toggle('quote-active');
+        }
+
+        function openEmail() {
+            window.location.href = 'mailto:yourname@example.com';
+        }
+
+        function callNumber() {
+            window.location.href = 'tel:+1234567890';
+        }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
