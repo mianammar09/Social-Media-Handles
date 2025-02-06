@@ -1,0 +1,491 @@
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Arial, sans-serif;
+}
+
+/* Background Circles */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.large {
+    width: 150px;
+    height: 150px;
+}
+
+.medium {
+    width: 100px;
+    height: 100px;
+}
+
+.small {
+    width: 50px;
+    height: 50px;
+}
+
+.pink {
+    background: #e91e63;
+    bottom: 10%;
+    left: 20%;
+}
+
+.blue {
+    background: #01579b;
+    top: 20%;
+    right: 10%;
+}
+
+.green {
+    background: #cddc39;
+    bottom: 5%;
+    right: 30%;
+}
+
+.hollow-green {
+    width: 200px;
+    height: 200px;
+    border: 3px solid #cddc39;
+    background: transparent;
+    top: 15%;
+    left: 40%;
+}
+
+.hollow-pink {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #e91e63;
+    background: transparent;
+    top: 30%;
+    left: 10%;
+}
+
+/* My Story */
+.story-text {
+    text-align: justify;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Social Icons */
+.social-icon {
+    font-size: 24px;
+    color: rgb(146, 46, 46);
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    color: #f39c12;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .circle {
+        display: none;
+    }
+}
+
+.social-icon {
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: scale(2.0);
+    box-shadow: 10px 10px 10px #01579b;
+}
+
+/* Make Home bold */
+.home-link {
+    font-weight: bold;
+}
+
+/* Hover effect for other links */
+.nav-link {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: scale(1.2);
+    /* Make the link pop up on hover */
+    text-decoration: 0px 0px 10px rgba(255, 255, 255, 0.3);
+    /* Subtle shadow */
+}
+
+footer a:hover {
+    color: #FFD700;
+    /* Change to a gold color on hover */
+    text-decoration: underline;
+}
+
+/* General Body Styling */
+body {
+    background-color: #ffffff;
+    color: #000000;
+    font-family: Arial, sans-serif;
+}
+
+/* Background Circles */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.large {
+    width: 150px;
+    height: 150px;
+}
+
+.medium {
+    width: 100px;
+    height: 100px;
+}
+
+.small {
+    width: 50px;
+    height: 50px;
+}
+
+.pink {
+    background: #e91e63;
+    bottom: 10%;
+    left: 20%;
+}
+
+.blue {
+    background: #01579b;
+    top: 20%;
+    right: 10%;
+}
+
+.green {
+    background: #cddc39;
+    bottom: 5%;
+    right: 30%;
+}
+
+.hollow-green {
+    width: 200px;
+    height: 200px;
+    border: 3px solid #cddc39;
+    background: transparent;
+    top: 15%;
+    left: 40%;
+}
+
+.hollow-pink {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #e91e63;
+    background: transparent;
+    top: 30%;
+    left: 10%;
+}
+
+/* Contact Form Styling */
+.contact-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-heading {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #01579b;
+}
+
+.contact-paragraph {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #01579b;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 12px;
+}
+
+.form-control:focus {
+    border-color: #01579b;
+    box-shadow: 0 0 5px rgba(1, 87, 155, 0.5);
+}
+
+.form-check-label {
+    font-size: 1rem;
+    color: #555;
+}
+
+.btn-custom {
+    background-color: #01579b;
+    color: white;
+    border-radius: 5px;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-custom:hover {
+    background-color: #013f6b;
+}
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+    display: none;
+}
+
+/* Social Icons */
+.social-icon {
+    font-size: 24px;
+    color: rgb(146, 46, 46);
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.social-icon:hover {
+    color: #f39c12;
+}
+
+/* Hover effect for other links */
+.nav-link {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: scale(1.2); /* Make the link pop up on hover */
+    text-decoration: 0px 0px 10px rgba(255, 255, 255, 0.3); /* Subtle shadow */
+}
+
+/* Make Home link bold */
+.home-link {
+    font-weight: bold;
+}
+
+/* Footer */
+footer a:hover {
+    color: #FFD700;
+    text-decoration: underline; /* Change to gold color and underline */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .circle {
+        display: none;
+    }
+}
+
+
+/* About Us Section */
+.about-section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #01579b;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.cta-heading {
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #01579b;
+}
+
+.cta-text {
+    font-size: 1.1rem;
+    color: #555;
+    margin-top: 10px;
+}
+
+.cta-link {
+    text-decoration: none;
+    color: #01579b;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.cta-link:hover {
+    color: #f39c12;
+}
+
+footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    margin-top: 50px;
+}
+
+footer p {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Mobile-responsive Styling */
+@media (max-width: 768px) {
+    .about-section-title {
+        font-size: 1.5rem;
+    }
+
+    .about-text {
+        font-size: 1rem;
+    }
+
+    .cta-heading {
+        font-size: 1.8rem;
+    }
+
+    .cta-text {
+        font-size: 1rem;
+    }
+}
+
+/* Circle Background */
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.large {
+    width: 150px;
+    height: 150px;
+}
+
+.medium {
+    width: 100px;
+    height: 100px;
+}
+
+.small {
+    width: 50px;
+    height: 50px;
+}
+
+.pink {
+    background: #e91e63;
+    bottom: 10%;
+    left: 20%;
+}
+
+.blue {
+    background: #01579b;
+    top: 20%;
+    right: 10%;
+}
+
+.green {
+    background: #cddc39;
+    bottom: 5%;
+    right: 30%;
+}
+
+.hollow-green {
+    width: 200px;
+    height: 200px;
+    border: 3px solid #cddc39;
+    background: transparent;
+    top: 15%;
+    left: 40%;
+}
+
+.hollow-pink {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #e91e63;
+    background: transparent;
+    top: 30%;
+    left: 10%;
+}
+
+
+/* Privacy and Policy Section */
+.policy-section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #01579b;
+    margin-top: 25px;
+}
+
+.policy-text {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.policy-link {
+    color: #01579b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.policy-link:hover {
+    color: #f39c12;
+}
+
+/* Mobile-responsive Styling */
+@media (max-width: 768px) {
+    .policy-section-title {
+        font-size: 1.5rem;
+    }
+
+    .policy-text {
+        font-size: 1rem;
+    }
+}
+
+/* Footer Styling */
+footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+    margin-top: 50px;
+}
+
+footer p {
+    font-size: 1rem;
+    color: #333;
+}
