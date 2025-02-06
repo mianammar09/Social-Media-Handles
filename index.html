@@ -1,185 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mian Ammar - My Social Links</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 30px;
-            background-color: #fff;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .container:hover {
-            transform: scale(1.02);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-        }
-        .profile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .profile img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-            border: 4px solid #333;
-            transition: transform 0.3s ease-in-out;
-        }
-        .profile img:hover {
-            transform: scale(1.1);
-        }
-        .profile h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: 700;
-            color: #333;
-            text-align: center;
-            cursor: pointer;
-            transition: color 0.3s ease-in-out;
-        }
-        .profile h1:hover {
-            color: #ff5e78;
-        }
-        .profile p {
-            margin: 5px 0;
-            font-size: 16px;
-            color: #666;
-            text-align: center;
-        }
-        .quote {
-            margin-bottom: 30px;
-            font-style: italic;
-            font-size: 20px;
-            color: #333;
-            text-align: center;
-            transition: transform 0.3s ease-in-out;
-        }
-        .quote:hover {
-            transform: scale(1.05) rotateX(5deg);
-            color: #ff5e78;
-        }
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .social-links a {
-            font-size: 24px;
-            color: #333;
-            transition: transform 0.3s ease-in-out;
-        }
-        .social-links a:hover {
-            color: #ff5e78;
-            transform: scale(1.1);
-        }
-        .contact-links {
-            text-align: center;
-        }
-        .contact-links p {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #333;
-            cursor: pointer;
-            transition: color 0.3s ease-in-out;
-        }
-        .contact-links p:hover {
-            color: #ff5e78;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #666;
-            font-size: 14px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        footer a {
-            color: #ff5e78;
-            text-decoration: none;
-            transition: color 0.3s ease-in-out;
-        }
-        footer a:hover {
-            color: #333;
-        }
-    </style>
+    <title>Home | LinkFusion</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="https://raw.githubusercontent.com/mianammar09/Social-Media-Handles/main/logo.png" type="image/png"> <!-- Change "logo.png" to your logo file path -->
 </head>
+
 <body>
-    <div class="container">
-        <div class="profile">
-            <img src="https://raw.githubusercontent.com/mianammar09/Social-Media-Handles/main/pic2.JPG" alt="Mian Ammar">
-            <h1 onclick="toggleName()">Mian Ammar Wattoo</h1>
-            <p>Tech Visionary</p>
-            <p>Lahore, Punjab, Pakistan</p>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="navbar navbar-expand-lg fixed-top"
+        style="background-color: rgba(1, 87, 155, 0.7); transition: top 0.3s;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://raw.githubusercontent.com/mianammar09/Social-Media-Handles/main/logo.png" alt="Logo" style="width: 150px; height: 60px; margin-right: 10px;">
+                <span class="fw-bold text-white">LinkFusion</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white active home-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="contact.html">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="about.html">About Us</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="quote">
-            <p onclick="toggleQuote()">"Success is not just about making money; it's about making a difference and leaving a legacy. -Ammar"</p>
-        </div>
-        <div class="social-links">
-            <a href="https://www.facebook.com/imianammar" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.snapchat.com/imianammar" target="_blank"><i class="fab fa-snapchat"></i></a>
-            <a href="https://www.linkedin.com/in/imianammar/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://wa.me/+923434218909" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            <a href="https://www.instagram.com/imianammar" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://twitter.com/imianammar" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.youtube.com/imianammar" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://threads.net/imianammar" target="_blank"><i class="fas fa-hashtag"></i></a>
-        </div>
-        
-        <div class="contact-links">
-            <p onclick="openEmail()"><i class="far fa-envelope"></i> immianammar@gmail.com</p>
-            <p onclick="callNumber()"><i class="fas fa-phone"></i> +923434218909 </p>
-        </div>
-        
+    </nav>
+
+
+    <!-- Background Circles -->
+    <div class="background">
+        <div class="circle large pink"></div>
+        <div class="circle small blue"></div>
+        <div class="circle medium green"></div>
+        <div class="circle large hollow-green"></div>
+        <div class="circle small hollow-pink"></div>
     </div>
 
-    <footer>
-        <p>&copy; Copyright owned by Mian Ammar. Developed by ❤️ for you. | <a href="privacy.html">Privacy Policy</a></p>
+    <!-- My Story Section -->
+    <section class="container d-flex align-items-center justify-content-center text-center text-lg-start"
+        style="min-height: 100vh;">
+        <div class="row align-items-center w-100">
+            <div class="col-lg-6">
+                <h1 class="fw-bold">I'm <span id="typing-text"></span></h1>
+                <p class="story-text">
+                    Welcome to my personal portfolio. I am passionate about web development, AI, and creating impactful
+                    projects. My journey started from a small village, and now I am here to make a difference through my
+                    skills and hard work.
+                </p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="https://raw.githubusercontent.com/mianammar09/Social-Media-Handles/main/p2.jpg" class="img-fluid rounded-circle" alt="Your Image"
+                    style="width: 400px; height: 400px;">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Social Media Section -->
+    <section class="text-center my-5">
+        <h2 class="fw-bold text-dark">Want to explore Ammar?</h2>
+        <p class="text-muted">Click on your favorite social media icon and connect with Ammar.</p>
+
+        <div class="mt-3">
+            <a href="https://www.facebook.com/imianammar" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: #1877F2;"><i
+                    class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com/imianammar" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: #1DA1F2;"><i
+                    class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/imianammar/" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: #0077B5;"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/imianammar" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: #E4405F;"><i
+                    class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/+923434218909" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: #25D366;"><i
+                    class="fab fa-whatsapp"></i></a>
+            <a href="mailto:immianammar@gmail.com.com" class="social-icon mx-2" style="font-size: 40px; color: #D44638;"><i
+                    class="fas fa-envelope"></i></a>
+            <a href="https://snapchat.com/t/hlvnOWKL" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: #FFFC00;"><i
+                    class="fab fa-snapchat"></i></a>
+            <a href="https://threads.net/imianammar" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: black;"><i
+                    class="fab fa-threads"></i></a>
+            <a href="https://www.tiktok.com/@imianammar" target="_blank" class="social-icon mx-2" style="font-size: 40px; color: #000000;"><i
+                    class="fab fa-tiktok"></i></a>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="text-center py-5 text-white" style="background-color: rgba(1, 87, 155, 0.7);">
+        <div class="container">
+            <!-- Contact Information -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3" style="font-size: 1.25rem;">Contact Information</h5>
+                    <p style="font-size: 1.1rem; line-height: 1.6;">Email: <a href="mailto:your-email@example.com"
+                            class="text-white"
+                            style="text-decoration: underline; font-weight: bold;">your-email@example.com</a></p>
+                    <p style="font-size: 1.1rem; line-height: 1.6;">Phone: <span style="font-weight: bold;">+123 456
+                            7890</span></p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3" style="font-size: 1.25rem;">Address</h5>
+                    <p style="font-size: 1.1rem; line-height: 1.6;">Your Address Here, City, Country</p>
+                </div>
+            </div>
+
+            <!-- Privacy Link -->
+            <div class="mb-4">
+                <a href="privacy.html" class="text-white"
+                    style="font-weight: bold; font-size: 1.2rem; text-decoration: underline;">Privacy & Policy</a>
+            </div>
+
+            <!-- Copyright -->
+            <p style="font-size: 1rem; font-weight: bold; opacity: 0.9;">&copy; 2025 My Portfolio. All Rights Reserved.
+            </p>
+        </div>
     </footer>
 
-    <script>
-        let nameClicked = false;
-
-        function toggleName() {
-            const nameElement = document.querySelector('.profile h1');
-            nameClicked = !nameClicked;
-            nameElement.textContent = nameClicked ? 'Clicked on my name, hoping for secrets? Nope, just good vibes and positivity!😁' : 'Mian Ammar Wattoo';
-        }
-
-        function toggleQuote() {
-            const quoteElement = document.querySelector('.quote p');
-            quoteElement.classList.toggle('quote-active');
-        }
-
-        function openEmail() {
-            window.location.href = 'mailto:immianammar@gmail.com';
-        }
-
-        function callNumber() {
-            window.location.href = 'tel:+923434218909';
-        }
-    </script>
-
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
 </body>
+
 </html>
