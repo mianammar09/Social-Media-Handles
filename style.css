@@ -489,3 +489,31 @@ footer p {
     font-size: 1rem;
     color: #333;
 }
+
+@media (max-width: 768px) {
+    .container {
+        margin-top: 60px; /* Adjusts space after the navbar in mobile view */
+    }
+    
+    .row {
+        flex-direction: column;
+    }
+    
+    .col-lg-6 {
+        text-align: center;
+    }
+
+    .img-fluid {
+        width: 250px; /* Adjust image size on mobile */
+        height: 250px;
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Adjust heading size on smaller screens */
+    }
+
+    .story-text {
+        font-size: 1.2rem; /* Adjust text size for better readability */
+    }
+}
+
