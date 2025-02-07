@@ -156,6 +156,7 @@
 
                 emailjs.send("service_q42ktx5", "template_y10ew73", templateParams)
                     .then(function(response) {
+                        console.log("response", response)
                         alert('Your message has been sent successfully!');
                     }, function(error) {
                         alert('Failed to send the message. Please try again later.');
