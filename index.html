@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Ammar Ajmal · portfolio master</title>
+    <!-- Bootstrap 5 + icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- premium fonts: Inter & Playfair -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,600;14..32,800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <!-- AOS + Hover.css -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Firebase modular SDK -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ivory: #faf7f2;
+            --charcoal: #1a1c1e;
+            --gold: #c4a484;
+            --deep-slate: #3e4a55;
+            --shadow-elevated: 0 40px 70px -20px rgba(0,0,0,0.25);
+            --border-subtle: rgba(196, 164, 132, 0.25);
+        }
+        body {
+            background: var(--ivory);
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, .display-1, .display-2, .display-3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .navbar {
+            background: rgba(250, 247, 242, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 1.2rem 2rem;
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--charcoal);
+        }
+        .nav-link {
+            color: var(--charcoal) !important;
+            font-weight: 500;
+            margin: 0 0.8rem;
+            position: relative;
+            font-size: 1.1rem;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s;
+        }
+        .nav-link:hover:after, .nav-link.active:after {
+            width: 70%;
+        }
+        .btn-luxury {
+            background: var(--charcoal);
+            color: white;
+            border-radius: 60px;
+            padding: 1rem 3rem;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.2);
+        }
+        .btn-luxury:hover {
+            background: var(--gold);
+            color: var(--charcoal);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-elevated);
+        }
+        .btn-outline-luxury {
+            background: transparent;
+            border: 1.5px solid var(--charcoal);
+            color: var(--charcoal);
+            border-radius: 60px;
+            padding: 1rem 3rem;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+        .btn-outline-luxury:hover {
+            background: var(--charcoal);
+            color: white;
+            transform: scale(1.02);
+        }
+        .card-majestic {
+            background: white;
+            border-radius: 2.5rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-elevated);
+            border: 1px solid rgba(255,255,255,0.7);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .card-majestic:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 50px 90px -20px rgba(196,164,132,0.4);
+        }
+        .glass-panel {
+            background: rgba(255,255,255,0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-subtle);
+            border-radius: 3rem;
+            padding: 2.5rem;
+        }
+        .input-couture {
+            background: white !important;
+            border: 1px solid rgba(0,0,0,0.05) !important;
+            border-radius: 60px !important;
+            padding: 1.4rem 2rem !important;
+            font-size: 1rem;
+        }
+        .input-couture:focus {
+            border-color: var(--gold) !important;
+            box-shadow: 0 0 0 5px rgba(196,164,132,0.2) !important;
+            outline: none;
+        }
+        .orb {
+            width: 60px; height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--charcoal);
+            transition: 0.25s;
+        }
+        .orb:hover {
+            background: var(--gold);
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+        #cookieConsent {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            border-radius: 100px;
+            padding: 1rem 2.2rem;
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.3);
+            z-index: 99999;
+            border: 1px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .admin-hidden { display: none; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--ivory); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 8px; }
+        .query-detail {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--gold);
+        }
+    </style>
+</head>
+<body>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Ammar <span style="color: var(--gold);">Ajmal</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarMain">
+            <ul class="navbar-nav" id="mainNav">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#story">Story</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#social">Social</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="#privacy">Privacy</a></li>
+            </ul>
+        </div>
+        <div class="d-none d-lg-flex gap-3">
+            <a href="https://github.com/mianammar09" class="orb hvr-pulse-grow"><i class="bi bi-github"></i></a>
+            <a href="https://www.linkedin.com/in/imianammar" class="orb hvr-pulse-grow"><i class="bi bi-linkedin"></i></a>
+        </div>
+    </div>
+</nav>
+
+<!-- MAIN SECTIONS -->
+<div class="container-fluid px-0">
+    <!-- HOME -->
+    <section id="home" class="min-vh-100 d-flex align-items-center py-5">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="badge bg-white text-dark px-4 py-2 rounded-pill mb-4 shadow-sm">◈ software engineering graduate</span>
+                    <h1 class="display-1 fw-bold">Ammar<br>Ajmal</h1>
+                    <p class="fs-3" style="color: var(--deep-slate);">Rohela Tejeka · Okara · Punjab</p>
+                    <p class="lead mt-4"><span style="background: rgba(196,164,132,0.1); padding: 0.2rem 1rem; border-radius: 60px;">const ammar = { role: "SE", roots: "village", code: "clean" };</span></p>
+                    <div class="d-flex flex-wrap gap-3 mt-5">
+                        <a href="#story" class="btn-luxury hvr-float-shadow">explore journey</a>
+                        <a href="#contact" class="btn-outline-luxury hvr-float-shadow">connect</a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="row g-3">
+                        <div class="col-6"><img src="https://github.com/mianammar09/Social-Media-Handles/raw/dd8f4919e25a6de70023a67b2734edfcbe304f17/1.JPG" class="img-fluid rounded-5 hvr-grow" alt="ammar"></div>
+                        <div class="col-6"><img src="https://github.com/mianammar09/Social-Media-Handles/raw/dd8f4919e25a6de70023a67b2734edfcbe304f17/image0.png" class="img-fluid rounded-5 mt-5 hvr-grow" alt="work"></div>
+                        <div class="col-6"><img src="https://github.com/mianammar09/Social-Media-Handles/raw/dd8f4919e25a6de70023a67b2734edfcbe304f17/2.JPG" class="img-fluid rounded-5 hvr-grow" alt="team"></div>
+                        <div class="col-6"><img src="https://github.com/mianammar09/Social-Media-Handles/raw/dd8f4919e25a6de70023a67b2734edfcbe304f17/3.jpg" class="img-fluid rounded-5 hvr-grow" alt="village"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORY -->
+    <section id="story" class="min-vh-100 py-6 d-flex align-items-center">
+        <div class="container">
+            <h2 class="display-2 fw-bold mb-5" data-aos="zoom-in-up">◈ the making</h2>
+            <div class="row g-5">
+                <div class="col-md-6" data-aos="flip-left"><div class="card-majestic"><span class="badge bg-light mb-3">2004</span><h3>Roots in Rohela Tejeka</h3><p>Never thought he'd end up a computer guy—drifted from biology to mathematics, and mathematics eventually led him to code.</p><code>while(young) { learn(); }</code></div></div>
+                <div class="col-md-6" data-aos="flip-right"><div class="card-majestic"><span class="badge bg-light mb-3">2025</span><h3>Graduation & beyond</h3><p>BSSE from Superior University, Lahore. Specialised in documentation, SQA, and project management.</p><code>npm i -g documentation</code></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="min-vh-100 py-6">
+        <div class="container">
+            <h2 class="display-2 fw-bold mb-5" data-aos="fade-up">/deployed</h2>
+            <div class="row g-4" id="projectsList"></div>
+        </div>
+    </section>
+
+    <!-- SOCIAL -->
+    <section id="social" class="min-vh-100 py-6 d-flex align-items-center">
+        <div class="container">
+            <h2 class="display-2 fw-bold mb-5 text-center" data-aos="fade-up">connect · six dimensions</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4 col-6"><a href="https://www.instagram.com/imianammar" target="_blank" class="text-decoration-none"><div class="glass-panel text-center hvr-bob"><i class="bi bi-instagram fs-1" style="color:#d62976;"></i><p class="mt-2">@imianammar</p><img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=200" class="img-fluid rounded-4"></div></a></div>
+                <div class="col-md-4 col-6"><a href="https://www.facebook.com/iMianAmmar" target="_blank" class="text-decoration-none"><div class="glass-panel text-center hvr-bob"><i class="bi bi-facebook fs-1" style="color:#1877f2;"></i><p class="mt-2">@iMianAmmar</p><img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200" class="img-fluid rounded-4"></div></a></div>
+                <div class="col-md-4 col-6"><a href="https://www.linkedin.com/in/imianammar" target="_blank" class="text-decoration-none"><div class="glass-panel text-center hvr-bob"><i class="bi bi-linkedin fs-1" style="color:#0a66c2;"></i><p class="mt-2">/in/imianammar</p><img src="https://images.unsplash.com/photo-1611944212129-29977ae1398c?w=200" class="img-fluid rounded-4"></div></a></div>
+                <div class="col-md-4 col-6"><a href="https://www.snapchat.com/add/imianammar" target="_blank" class="text-decoration-none"><div class="glass-panel text-center hvr-bob"><i class="bi bi-snapchat fs-1" style="color:#fffc00;"></i><p class="mt-2">imianammar</p><img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=200" class="img-fluid rounded-4"></div></a></div>
+                <div class="col-md-4 col-6"><a href="https://wa.me/923434218909" target="_blank" class="text-decoration-none"><div class="glass-panel text-center hvr-bob"><i class="bi bi-whatsapp fs-1" style="color:#25d366;"></i><p class="mt-2">+92 343 421 8909</p><img src="https://images.unsplash.com/photo-1611162618071-b39a2ec055fb?w=200" class="img-fluid rounded-4"></div></a></div>
+                <div class="col-md-4 col-6"><a href="https://twitter.com/imianammar" target="_blank" class="text-decoration-none"><div class="glass-panel text-center hvr-bob"><i class="bi bi-twitter-x fs-1"></i><p class="mt-2">@imianammar</p><img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=200" class="img-fluid rounded-4"></div></a></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contact" class="min-vh-100 d-flex align-items-center py-6">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <h2 class="display-2 fw-bold">write</h2>
+                    <p class="fs-4 mt-3"><i class="bi bi-pin-map"></i> Rohela Tejeka, Okara</p>
+                    <p><i class="bi bi-envelope"></i> immianammar@gmail.com</p>
+                    <div class="d-flex gap-3 mt-5">
+                        <span class="orb hvr-pulse"> <a<i class="bi bi-whatsapp"></i></span>
+                        <span class="orb hvr-pulse"> <a href="https://m.me/imianammar" target="_blank" class="text-decoration-none"><i class="bi bi-messenger"></i></a></span>
+                        <span class="orb hvr-pulse"> <a href="https://t.me/imianammar" target="_blank" class="text-decoration-none"><i class="bi bi-telegram"></i></a></span>
+                    </div>
+                </div>
+                <div class="col-lg-7" data-aos="fade-left">
+                    <form id="contactForm" class="glass-panel">
+                        <input type="text" class="form-control input-couture mb-4" id="contactName" placeholder="your name" required>
+                        <input type="email" class="form-control input-couture mb-4" id="contactEmail" placeholder="your email address" required>
+                        <input type="text" class="form-control input-couture mb-4" id="contactSubject" placeholder="subject" required>
+                        <textarea rows="4" class="form-control input-couture mb-4" id="contactMsg" placeholder="your message..." required></textarea>
+                        <button type="submit" class="btn-luxury w-100" id="contactSubmit"><i class="bi bi-send"></i> send message</button>
+                        <div id="contactFeedback" class="mt-3 text-center small"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section id="privacy" class="min-vh-100 py-6">
+        <div class="container">
+            <h2 class="display-2 fw-bold mb-5" data-aos="fade-up">privacy & footprint</h2>
+            <div class="row">
+                <div class="col-lg-7"><div class="card-majestic"><h3>🍪 consent & geodata</h3><p>After permission, we collect browser, region, precise location, and time. Total visits: <span id="visitCounter" class="fw-bold">0</span></p></div></div>
+                <div class="col-lg-5"><div class="glass-panel"><h5>current consent</h5><p id="cookieStatus"><i class="bi bi-hourglass"></i> checking...</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN PANEL - REQUIRES LOGIN EACH TIME -->
+    <section id="admin" class="min-vh-100 py-6 admin-hidden">
+        <div class="container">
+            <h2 class="display-2 fw-bold mb-5">admin · cockpit</h2>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="glass-panel" id="adminLoginPanel">
+                        <h4 class="mb-4">🔐 secure entry (login each time)</h4>
+                        <form id="adminLoginForm">
+                            <input type="email" class="form-control input-couture mb-3" id="adminEmail" placeholder="email" required>
+                            <input type="password" class="form-control input-couture mb-4" id="adminPassword" placeholder="password" required>
+                            <button type="submit" class="btn-luxury w-100">authenticate</button>
+                            <div id="loginError" class="text-danger mt-2"></div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div id="adminDashboard" style="display: none;">
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6"><div class="card-majestic text-center"><h3 id="totalVisitsAdmin">-</h3><p>total visits</p></div></div>
+                            <div class="col-sm-6"><div class="card-majestic text-center"><h3 id="queriesTotal">-</h3><p>queries</p></div></div>
+                            <div class="col-sm-6"><div class="card-majestic text-center"><h3 id="queriesReplied">-</h3><p>replied</p></div></div>
+                            <div class="col-sm-6"><div class="card-majestic text-center"><h3 id="queriesPending">-</h3><p>pending</p></div></div>
+                        </div>
+                        
+                        <div class="glass-panel mb-4">
+                            <h5 class="mb-3">📋 all queries (with details)</h5>
+                            <div id="queryDetailsList" style="max-height: 300px; overflow-y: auto;"></div>
+                        </div>
+                        
+                        <div class="glass-panel mb-4">
+                            <h5>📍 recent visitor logs</h5>
+                            <ul id="visitLogs" class="list-unstyled small" style="max-height:200px; overflow-y:auto;"></ul>
+                        </div>
+                        
+                        <div class="glass-panel">
+                            <h5>📨 respond to query (from: immianammar@gmail.com)</h5>
+                            <select class="form-select input-couture mb-3" id="querySelect"></select>
+                            <input type="text" class="form-control input-couture mb-3" id="responseSubject" placeholder="subject" value="Re: Your portfolio inquiry">
+                            <textarea id="responseText" class="form-control input-couture mb-3" placeholder="type your response..."></textarea>
+                            <button class="btn-luxury" id="sendResponseBtn">send real email</button>
+                        </div>
+                        
+                        <!-- Logout button for explicit sign out -->
+                        <div class="mt-3 text-center">
+                            <button class="btn-outline-luxury" id="logoutBtn">logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- FOOTER -->
+<footer class="py-4 text-center" style="background: white;">
+    <p class="small text-secondary">© Ammar Ajmal — built with code, love & Punjab soil.</p>
+    <a href="#admin" id="secretAdminLink" class="small" style="color: var(--gold);">⚙️ admin</a>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookieConsent" class="animate__animated animate__fadeInUp">
+    <span><i class="bi bi-cookie me-2"></i> allow location & cookies?</span>
+    <button class="btn btn-sm btn-luxury" id="acceptCookieBtn">accept</button>
+</div>
+
+<!-- FIREBASE + EMAILJS INTEGRATION -->
+<script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
+    import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, increment, setDoc, getDoc, onSnapshot, query, orderBy, limit, Timestamp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyAIzWpafnZuBtBEMAry8nqXANC9x_g48tA",
+        authDomain: "morethanportfolio.firebaseapp.com",
+        databaseURL: "https://morethanportfolio-default-rtdb.firebaseio.com",
+        projectId: "morethanportfolio",
+        storageBucket: "morethanportfolio.firebasestorage.app",
+        messagingSenderId: "946045125640",
+        appId: "1:946045125640:web:5fde665c2ab459f619fdbd",
+        measurementId: "G-17S5V4DVML"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Initialize EmailJS
+    emailjs.init("qseWAcT0uETfpXTIT");
+    
+    // Cookie & Location
+    const banner = document.getElementById('cookieConsent');
+    if (localStorage.getItem('cookieAccepted') !== 'true') {
+        banner.style.display = 'flex';
+    } else { 
+        banner.style.display = 'none'; 
+        registerVisitWithLocation(); 
+    }
+
+    document.getElementById('acceptCookieBtn').addEventListener('click', () => {
+        localStorage.setItem('cookieAccepted', 'true');
+        banner.style.display = 'none';
+        registerVisitWithLocation();
+    });
+
+    async function registerVisitWithLocation() {
+        const browser = navigator.userAgent;
+        const time = new Date().toLocaleString();
+        let locationData = { country: 'unknown', region: 'unknown', city: 'unknown', lat: null, lng: null };
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                locationData.lat = pos.coords.latitude;
+                locationData.lng = pos.coords.longitude;
+                locationData.country = 'Pakistan';
+                locationData.region = 'Punjab';
+                locationData.city = 'Okara';
+                await saveVisit(browser, time, locationData);
+            }, async (err) => { await saveVisit(browser, time, locationData); });
+        } else { await saveVisit(browser, time, locationData); }
+    }
+
+    async function saveVisit(browser, time, loc) {
+        await addDoc(collection(db, 'visits'), { browser, time, location: loc, timestamp: Timestamp.now() });
+        const counterRef = doc(db, 'analytics', 'totalVisits');
+        await setDoc(counterRef, { count: increment(1) }, { merge: true });
+    }
+
+    onSnapshot(doc(db, 'analytics', 'totalVisits'), (d) => {
+        if (d.exists()) document.getElementById('visitCounter').innerText = d.data().count;
+    });
+
+    // Load Projects
+    async function loadProjects() {
+        const container = document.getElementById('projectsList');
+        const snap = await getDocs(collection(db, 'projects'));
+        if (!snap.empty) {
+            container.innerHTML = '';
+            snap.forEach(d => {
+                container.innerHTML += `<div class="col-md-6"><div class="card-majestic hvr-float"><h3>${d.data().title}</h3><p>${d.data().desc}</p></div></div>`;
+            });
+        } else {
+            container.innerHTML = `<div class="col-md-6"><div class="card-majestic"><h3>TechDocs Pro</h3><p>Documentation suite for 3 projects.</p></div></div><div class="col-md-6"><div class="card-majestic"><h3>SQA Automation</h3><p>90% coverage, zero prod bugs.</p></div></div>`;
+        }
+    }
+    loadProjects();
+
+    // CONTACT FORM - Sends FROM user's email TO immianammar@gmail.com
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('contactName').value;
+        const email = document.getElementById('contactEmail').value;
+        const subject = document.getElementById('contactSubject').value;
+        const message = document.getElementById('contactMsg').value;
+        const feedback = document.getElementById('contactFeedback');
+        
+        try {
+            // Save to Firestore
+            await addDoc(collection(db, 'queries'), { 
+                name, 
+                email, 
+                subject,
+                message, 
+                replied: false, 
+                timestamp: Timestamp.now() 
+            });
+            
+            // Send email to immianammar@gmail.com
+            const templateParams = {
+                to_email: 'immianammar@gmail.com',
+                from_name: name,
+                from_email: email,
+                subject: subject,
+                message: message
+            };
+            
+            await emailjs.send('service_xhbsiyq', 'template_anlezl6', templateParams);
+            
+            feedback.innerHTML = '<span class="text-success">✔️ message sent & delivered to Ammar.</span>';
+            e.target.reset();
+        } catch (err) {
+            console.error(err);
+            feedback.innerHTML = '<span class="text-danger">error. please try again.</span>';
+        }
+    });
+
+    // Admin Panel - Secret Link
+    document.getElementById('secretAdminLink').addEventListener('click', async (e) => {
+        e.preventDefault();
+        
+        // Sign out any existing user FIRST to ensure login each time
+        try {
+            await signOut(auth);
+        } catch (err) {
+            console.log('Sign out error (probably already signed out)');
+        }
+        
+        // Hide dashboard and show login panel
+        document.getElementById('adminLoginPanel').style.display = 'block';
+        document.getElementById('adminDashboard').style.display = 'none';
+        
+        // Show admin section
+        document.getElementById('admin').classList.remove('admin-hidden');
+        document.getElementById('admin').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Admin Login
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    adminLoginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('adminEmail').value;
+        const pass = document.getElementById('adminPassword').value;
+        try { 
+            await signInWithEmailAndPassword(auth, email, pass); 
+            document.getElementById('adminEmail').value = '';
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('loginError').innerText = '';
+        } catch { 
+            document.getElementById('loginError').innerText = 'access denied'; 
+        }
+    });
+
+    // Logout button
+    document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+        await signOut(auth);
+        document.getElementById('adminLoginPanel').style.display = 'block';
+        document.getElementById('adminDashboard').style.display = 'none';
+    });
+
+    // Auth State Observer - REQUIRES LOGIN EACH TIME
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            // User is signed in - show dashboard
+            document.getElementById('adminLoginPanel').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            
+            // Load stats
+            const visitsSnap = await getDoc(doc(db, 'analytics', 'totalVisits'));
+            document.getElementById('totalVisitsAdmin').innerText = visitsSnap.data()?.count || 0;
+            
+            const qSnap = await getDocs(collection(db, 'queries'));
+            document.getElementById('queriesTotal').innerText = qSnap.size;
+            const replied = qSnap.docs.filter(d => d.data().replied).length;
+            document.getElementById('queriesReplied').innerText = replied;
+            document.getElementById('queriesPending').innerText = qSnap.size - replied;
+
+            // Display all queries
+            const queryDetailsList = document.getElementById('queryDetailsList');
+            queryDetailsList.innerHTML = '';
+            qSnap.forEach(docu => {
+                const data = docu.data();
+                const repliedBadge = data.replied ? '<span class="badge bg-success">Replied</span>' : '<span class="badge bg-warning text-dark">Pending</span>';
+                const date = data.timestamp ? new Date(data.timestamp.toDate()).toLocaleString() : 'Unknown';
+                
+                queryDetailsList.innerHTML += `
+                    <div class="query-detail">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0"><strong>${data.name}</strong> (${data.email}) ${repliedBadge}</h6>
+                            <small class="text-secondary">${date}</small>
+                        </div>
+                        <p class="mb-1"><strong>Subject:</strong> ${data.subject || 'No subject'}</p>
+                        <p class="mb-2"><strong>Message:</strong> ${data.message.substring(0, 100)}${data.message.length > 100 ? '...' : ''}</p>
+                        ${data.response ? `<p class="mb-0 text-success"><strong>Response:</strong> ${data.response.substring(0, 50)}...</p>` : ''}
+                    </div>
+                `;
+            });
+
+            // Visit logs
+            const visitSnap = await getDocs(query(collection(db, 'visits'), orderBy('timestamp', 'desc'), limit(10)));
+            const logList = document.getElementById('visitLogs');
+            logList.innerHTML = '';
+            visitSnap.forEach(d => {
+                const data = d.data();
+                logList.innerHTML += `<li><i class="bi bi-geo-alt"></i> ${data.time} — ${data.location.country}, ${data.location.city}</li>`;
+            });
+
+            // Populate query select for replies
+            const select = document.getElementById('querySelect');
+            select.innerHTML = '';
+            qSnap.forEach(docu => {
+                if (!docu.data().replied) {
+                    let opt = document.createElement('option');
+                    opt.value = docu.id;
+                    opt.text = `${docu.data().name} (${docu.data().email}) - ${docu.data().subject || 'no subject'}`;
+                    select.appendChild(opt);
+                }
+            });
+
+            // Send reply FROM immianammar@gmail.com TO client
+            document.getElementById('sendResponseBtn').onclick = async () => {
+                const qid = select.value;
+                if (!qid) return;
+                const response = document.getElementById('responseText').value;
+                const responseSubject = document.getElementById('responseSubject').value || 'Re: Your portfolio inquiry';
+                const qDoc = await getDoc(doc(db, 'queries', qid));
+                const clientEmail = qDoc.data().email;
+                const clientName = qDoc.data().name;
+                
+                const templateParams = {
+                    to_email: clientEmail,
+                    from_name: 'Ammar Ajmal',
+                    from_email: 'immianammar@gmail.com',
+                    subject: responseSubject,
+                    message: `Dear ${clientName},\n\n${response}\n\nBest regards,\nAmmar Ajmal`
+                };
+                
+                try {
+                    await emailjs.send('service_xhbsiyq', 'template_anlezl6', templateParams);
+                    await updateDoc(doc(db, 'queries', qid), { 
+                        replied: true, 
+                        response, 
+                        responseSubject,
+                        respondedAt: Timestamp.now() 
+                    });
+                    alert(`✅ Reply sent from immianammar@gmail.com to ${clientEmail}`);
+                    location.reload();
+                } catch (err) {
+                    alert('Email failed: ' + err);
+                }
+            };
+        } else {
+            // User is signed out - show login panel
+            document.getElementById('adminLoginPanel').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+        }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('#mainNav .nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const id = link.getAttribute('href').substring(1);
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    AOS.init({ duration: 1000, once: false, mirror: true });
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
